@@ -1,0 +1,1034 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Kenzie Market",
+    "description": "This is a sample server for a Kenzie Academy Project.",
+    "contact": {
+      "name": "API Support",
+      "url": "https://www.linkedin.com/in/marcosviniciusgulhotti/",
+      "email": "marcosmvg77@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+
+  "servers": [
+    {
+      "url": "http://localhost:3000/api-documentation",
+      "description": "Docs"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Usuário",
+                    "email": "email@mail.com",
+                    "password": "senha",
+                    "isAdm": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "email": "mail@mail.com",
+                      "password": "$2b$10$EIzaT/Lx1nxQu/2HSGosKOI1p1YVlu0mc.Ms26BE6NXh/3H7juh9.",
+                      "name": "Usuário",
+                      "id": "c6d592ce-5a8d-4d5a-a825-5121d81b9748",
+                      "isAdm": true,
+                      "createdAt": "2022-02-03T20:34:33.257Z",
+                      "updatedAt": "2022-02-03T20:34:33.257Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List All Users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "data": [
+                        {
+                          "id": "6990e1fc-850a-4b9c-bb1a-ada26055bdcf",
+                          "name": "marcos",
+                          "email": "user@email.com",
+                          "password": "$2b$10$wfh/lpG4esrqSTrzwsij5.qtcsE4248.QNoo2C8zMdiaaCnlbqIyS",
+                          "isAdm": false,
+                          "createdAt": "2022-02-03T18:09:10.802Z",
+                          "updatedAt": "2022-02-03T18:37:22.253Z",
+                          "resetPasswordCode": "invalid",
+                          "resetPasswordExpires": "2022-02-03T19:34:18.951Z"
+                        },
+                        {
+                          "id": "88bf8c71-f0fe-488f-a171-86918c0493ae",
+                          "name": "marcos",
+                          "email": "adm@email.com",
+                          "password": "$2b$10$3dnWW4sU6TV55ES0RVVjXOc3ZO/dU0qIhBYYG769itpmFvGrWHvLC",
+                          "isAdm": true,
+                          "createdAt": "2022-02-03T18:39:41.913Z",
+                          "updatedAt": "2022-02-03T18:39:41.913Z",
+                          "resetPasswordCode": "invalid",
+                          "resetPasswordExpires": null
+                        },
+                        {
+                          "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                          "name": "marcos",
+                          "email": "marcos@email.com",
+                          "password": "$2b$10$kx8beCMW87yjX.ONoQCI7.D6S5ulehTLDNviMPYV3EzriuhYwLEDG",
+                          "isAdm": true,
+                          "createdAt": "2022-02-03T20:34:33.257Z",
+                          "updatedAt": "2022-02-03T20:34:33.257Z",
+                          "resetPasswordCode": "invalid",
+                          "resetPasswordExpires": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/id": {
+      "parameters": [
+        {
+          "name": "token",
+          "in": "header",
+          "description": "token to be passed as a header",
+          "required": true,
+          "schema": {}
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List User By ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "user": {
+                        "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                        "name": "marcos",
+                        "email": "marcos@email.com",
+                        "isAdm": true,
+                        "createdAt": "2022-02-03T20:34:33.257Z",
+                        "updatedAt": "2022-02-03T20:34:33.257Z"
+                      },
+                      "cart": {
+                        "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "default": {
+                  "email": "email@mail.com",
+                  "password": "senha"
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "email@mail.com",
+                    "password": "senha"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "user": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiODhiZjhjNzEtZjBmZS00ODhmLWExNzEtODY5MThjMDQ5M2FlIiwibmFtZSI6Im1hcmNvcyIsImVtYWlsIjoiYWRtQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDNkbldXNHNVNlRWNTVFUzBSVlZqWE9jM1pPL2RVMHFJaEJZWUc3NjlpdHBtRnZHcldIdkxDIiwiaXNBZG0iOnRydWUsImNyZWF0ZWRBdCI6IjIwMjItMDItMDNUMTg6Mzk6NDEuOTEzWiIsInVwZGF0ZWRBdCI6IjIwMjItMDItMDNUMTg6Mzk6NDEuOTEzWiIsInJlc2V0UGFzc3dvcmRDb2RlIjoiaW52YWxpZCIsInJlc2V0UGFzc3dvcmRFeHBpcmVzIjpudWxsfSwiaWF0IjoxNjQzOTIwNTE3LCJleHAiOjE2NDQwMDY5MTd9.4TclrDM7104BIDXcR0l0aX-Y1Z9CDcOxVYzSRis-VIY"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "default": {
+                  "name": "carro",
+                  "price": 156000
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "carro",
+                    "price": 156000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created Product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "data": {
+                      "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                      "name": "carro",
+                      "price": 156000,
+                      "createdAt": "2022-02-03T20:38:26.014Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "data": {
+                        "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                        "name": "carro",
+                        "price": 156000,
+                        "createdAt": "2022-02-03T20:38:26.014Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List All Products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "data": [
+                      {
+                        "id": "395711e0-e83d-4121-aabb-137fe6c3900b",
+                        "name": "Melancia",
+                        "price": 11,
+                        "createdAt": "2022-02-02T19:06:48.192Z"
+                      },
+                      {
+                        "id": "6d44ea88-fcef-4379-81d9-73728fecbd47",
+                        "name": "Sofá",
+                        "price": 110,
+                        "createdAt": "2022-02-02T22:30:04.083Z"
+                      },
+                      {
+                        "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                        "name": "Mesa",
+                        "price": 156,
+                        "createdAt": "2022-02-02T22:31:34.408Z"
+                      },
+                      {
+                        "id": "755fa9de-2470-4dc5-ae18-57a9231cc9af",
+                        "name": "Guarda Roupa",
+                        "price": 156,
+                        "createdAt": "2022-02-02T22:34:37.577Z"
+                      },
+                      {
+                        "id": "434ade89-dbd3-43d9-be99-d519576bb8c2",
+                        "name": "Caju",
+                        "price": 156,
+                        "createdAt": "2022-02-03T16:42:29.751Z"
+                      },
+                      {
+                        "id": "0d68777a-8d73-46a6-9a44-fd60f3ddb033",
+                        "name": "Fazenda",
+                        "price": 156000,
+                        "createdAt": "2022-02-03T20:36:45.571Z"
+                      },
+                      {
+                        "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                        "name": "carro",
+                        "price": 156000,
+                        "createdAt": "2022-02-03T20:38:26.014Z"
+                      }
+                    ]
+                  }
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "data": [
+                        {
+                          "id": "395711e0-e83d-4121-aabb-137fe6c3900b",
+                          "name": "Melancia",
+                          "price": 11,
+                          "createdAt": "2022-02-02T19:06:48.192Z"
+                        },
+                        {
+                          "id": "6d44ea88-fcef-4379-81d9-73728fecbd47",
+                          "name": "Sofá",
+                          "price": 110,
+                          "createdAt": "2022-02-02T22:30:04.083Z"
+                        },
+                        {
+                          "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                          "name": "Mesa",
+                          "price": 156,
+                          "createdAt": "2022-02-02T22:31:34.408Z"
+                        },
+                        {
+                          "id": "755fa9de-2470-4dc5-ae18-57a9231cc9af",
+                          "name": "Guarda Roupa",
+                          "price": 156,
+                          "createdAt": "2022-02-02T22:34:37.577Z"
+                        },
+                        {
+                          "id": "434ade89-dbd3-43d9-be99-d519576bb8c2",
+                          "name": "Caju",
+                          "price": 156,
+                          "createdAt": "2022-02-03T16:42:29.751Z"
+                        },
+                        {
+                          "id": "0d68777a-8d73-46a6-9a44-fd60f3ddb033",
+                          "name": "Fazenda",
+                          "price": 156000,
+                          "createdAt": "2022-02-03T20:36:45.571Z"
+                        },
+                        {
+                          "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                          "name": "carro",
+                          "price": 156000,
+                          "createdAt": "2022-02-03T20:38:26.014Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/id": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List Product By ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                    "name": "carro",
+                    "price": 156000,
+                    "createdAt": "2022-02-03T20:38:26.014Z"
+                  }
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "id": "45babbff-1967-4fd7-b77d-111e050ae50a",
+                      "name": "carro",
+                      "price": 156000,
+                      "createdAt": "2022-02-03T20:38:26.014Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart": {
+      "parameters": [
+        {
+          "name": "token",
+          "in": "header",
+          "description": "token to be passed as a header",
+          "required": true,
+          "schema": {}
+        }
+      ],
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "default": {
+                  "product": "Mesa"
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "product": "Mesa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created Product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "Sucess": "Product added to cart",
+                    "product": {
+                      "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                      "name": "Mesa",
+                      "price": 156
+                    }
+                  }
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "Sucess": "Product added to cart",
+                      "product": {
+                        "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                        "name": "Mesa",
+                        "price": 156
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "adm",
+            "in": "header",
+            "description": "You need to be and adm",
+            "schema": {
+              "default": {
+                "user": {
+                  "isAdm": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List All Carts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "data": [
+                      {
+                        "cart": {
+                          "id": "d295e77b-fba3-4d42-a16b-1f9be07bafd8",
+                          "owner": {
+                            "id": "88bf8c71-f0fe-488f-a171-86918c0493ae",
+                            "name": "marcos"
+                          },
+                          "products": []
+                        }
+                      },
+                      {
+                        "cart": {
+                          "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd",
+                          "owner": {
+                            "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                            "name": "marcos"
+                          },
+                          "products": []
+                        }
+                      },
+                      {
+                        "cart": {
+                          "id": "99c53c11-32bd-4e2f-8547-956c3e7dcfc0",
+                          "owner": {
+                            "id": "6990e1fc-850a-4b9c-bb1a-ada26055bdcf",
+                            "name": "marcos"
+                          },
+                          "products": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                "examples": {
+                  "Full carts": {
+                    "value": {
+                      "data": [
+                        {
+                          "cart": {
+                            "id": "d295e77b-fba3-4d42-a16b-1f9be07bafd8",
+                            "owner": {
+                              "id": "88bf8c71-f0fe-488f-a171-86918c0493ae",
+                              "name": "marcos"
+                            },
+                            "products": [
+                              {
+                                "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                                "name": "Mesa",
+                                "price": 156,
+                                "completedPurchaseId": "fe7d36cc-daed-436a-a623-0dee351ad034",
+                                "createdAt": "2022-02-02T22:31:34.408Z"
+                              },
+                              {
+                                "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                                "name": "Mesa",
+                                "price": 156,
+                                "completedPurchaseId": "fe7d36cc-daed-436a-a623-0dee351ad034",
+                                "createdAt": "2022-02-02T22:31:34.408Z"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "cart": {
+                            "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd",
+                            "owner": {
+                              "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                              "name": "marcos"
+                            },
+                            "products": []
+                          }
+                        },
+                        {
+                          "cart": {
+                            "id": "99c53c11-32bd-4e2f-8547-956c3e7dcfc0",
+                            "owner": {
+                              "id": "6990e1fc-850a-4b9c-bb1a-ada26055bdcf",
+                              "name": "marcos"
+                            },
+                            "products": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Empty Cart": {
+                    "value": {
+                      "data": [
+                        {
+                          "cart": {
+                            "id": "d295e77b-fba3-4d42-a16b-1f9be07bafd8",
+                            "owner": {
+                              "id": "88bf8c71-f0fe-488f-a171-86918c0493ae",
+                              "name": "marcos"
+                            },
+                            "products": []
+                          }
+                        },
+                        {
+                          "cart": {
+                            "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd",
+                            "owner": {
+                              "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                              "name": "marcos"
+                            },
+                            "products": []
+                          }
+                        },
+                        {
+                          "cart": {
+                            "id": "99c53c11-32bd-4e2f-8547-956c3e7dcfc0",
+                            "owner": {
+                              "id": "6990e1fc-850a-4b9c-bb1a-ada26055bdcf",
+                              "name": "marcos"
+                            },
+                            "products": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/id": {
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List Cart By ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "cart": {
+                      "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd",
+                      "owner": {
+                        "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                        "name": "marcos"
+                      },
+                      "products": []
+                    }
+                  }
+                },
+                "examples": {
+                  "Empty Cart": {
+                    "value": {
+                      "cart": {
+                        "id": "67e9eba1-81e1-4eb6-ab4d-0a678c465fdd",
+                        "owner": {
+                          "id": "8be1fcce-721e-4cf2-a20b-bbf7ca39f475",
+                          "name": "marcos"
+                        },
+                        "products": []
+                      }
+                    }
+                  },
+                  "Full Cart": {
+                    "value": {
+                      "cart": {
+                        "id": "d295e77b-fba3-4d42-a16b-1f9be07bafd8",
+                        "owner": {
+                          "id": "88bf8c71-f0fe-488f-a171-86918c0493ae",
+                          "name": "marcos"
+                        },
+                        "products": [
+                          {
+                            "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                            "name": "Mesa",
+                            "price": 156,
+                            "completedPurchaseId": "fe7d36cc-daed-436a-a623-0dee351ad034",
+                            "createdAt": "2022-02-02T22:31:34.408Z"
+                          },
+                          {
+                            "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                            "name": "Mesa",
+                            "price": 156,
+                            "completedPurchaseId": "fe7d36cc-daed-436a-a623-0dee351ad034",
+                            "createdAt": "2022-02-02T22:31:34.408Z"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/product_id": {
+      "delete": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete item from cart",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/buy": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Buy itens from cart",
+            "content": {
+              "default": {
+                "example": {
+                  "data": [
+                    {
+                      "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                      "name": "Mesa",
+                      "price": 156,
+                      "completedPurchaseId": "b6ff9cfd-fabf-40d6-9b90-8f68c93efe97",
+                      "createdAt": "2022-02-02T22:31:34.408Z"
+                    },
+                    {
+                      "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                      "name": "Mesa",
+                      "price": 156,
+                      "completedPurchaseId": "3288bdf0-0f18-407e-88fb-3b01f261f3f4",
+                      "createdAt": "2022-02-02T22:31:34.408Z"
+                    }
+                  ],
+                  "total": 312
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "adm",
+            "in": "header",
+            "description": "You need to be and adm",
+            "schema": {
+              "default": {
+                "user": {
+                  "isAdm": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List All Closed Purchases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "data": [
+                      {
+                        "cart": {
+                          "id": "7dee3a69-7ad0-4872-a9d9-71ea638c131a",
+                          "owner": {
+                            "id": "4d7d6ac6-52bb-4303-858a-3202865ef52c",
+                            "name": "Usuário"
+                          }
+                        },
+                        "closedProducts": []
+                      },
+                      {
+                        "cart": {
+                          "id": "1d381a9a-9326-450b-874a-77e45581b1e5",
+                          "owner": {
+                            "id": "032fd558-54dc-44d8-9f4a-5deca1e6512b",
+                            "name": "Administrador"
+                          }
+                        },
+                        "closedProducts": []
+                      },
+                      {
+                        "cart": {
+                          "id": "e3c1f386-2a47-4319-a685-75c99e2af64c",
+                          "owner": {
+                            "id": "fae3aaf0-c96e-4e48-8b97-e11bafddb0a6",
+                            "name": "marcos"
+                          }
+                        },
+                        "closedProducts": [
+                          {
+                            "id": "434ade89-dbd3-43d9-be99-d519576bb8c2",
+                            "name": "Caju",
+                            "price": 156,
+                            "completedPurchaseId": "51912ca2-65dc-457f-95a5-3b7a0f229a39",
+                            "createdAt": "2022-02-03T16:42:29.751Z"
+                          },
+                          {
+                            "id": "434ade89-dbd3-43d9-be99-d519576bb8c2",
+                            "name": "Caju",
+                            "price": 156,
+                            "completedPurchaseId": "51912ca2-65dc-457f-95a5-3b7a0f229a39",
+                            "createdAt": "2022-02-03T16:42:29.751Z"
+                          },
+                          {
+                            "id": "434ade89-dbd3-43d9-be99-d519576bb8c2",
+                            "name": "Caju",
+                            "price": 156,
+                            "completedPurchaseId": "51912ca2-65dc-457f-95a5-3b7a0f229a39",
+                            "createdAt": "2022-02-03T16:42:29.751Z"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buy/completed_purchase_id": {
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get closed purchase",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "default": {
+                    "data": {
+                      "id": "55738398-d5c7-47a9-ac4c-d49c51a602b3",
+                      "name": "Mesa",
+                      "price": 156,
+                      "completedPurchaseId": "fe7d36cc-daed-436a-a623-0dee351ad034",
+                      "createdAt": "2022-02-02T22:31:34.408Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/email": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "adm",
+            "in": "header",
+            "description": "You need to be and adm",
+            "schema": {
+              "default": {
+                "user": {
+                  "isAdm": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Send Email to users",
+            "content": {
+              "default": {
+                "example": {
+                  "message": "Email Sent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recuperar": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Send Email with recover password code",
+            "content": {
+              "default": {
+                "example": {
+                  "message": {
+                    "message": "Code Send, valid for 1 hour"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alterar_senha": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "default": {
+                  "code": "ff0033e1e1881820dffe4d32c2ab899d07194104",
+                  "newPassword": "newPassword"
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "code": "ff0033e1e1881820dffe4d32c2ab899d07194104",
+                    "newPassword": "newPassword"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Change password",
+            "content": {
+              "default": {
+                "example": {
+                  "message": {
+                    "data": {
+                      "newPassword": "$2b$10$h/KuGiKPWJKPSj6p./H.KOTgCX4zFUsa6hl9J7pTL5jZHFBurISmO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "isAdm": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: npm run dev
+    ports:
+      - 3000:3000
+    environment:
+      - PG_PASSWORD=gulhotti
+      - PG_DB=entrega6
+      - PG_USER=postgres
+      - PG_HOST=db
+      - MAIL_USER=1da57261be78b9
+      - MAIL_PASSWORD=97350a122597c4
+    volumes:
+      - .:/code
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=gulhotti
+      - POSTGRES_DB=entrega6
+      - POSTGRES_USER=postgres
+
+    ports:
+      - 5432:5432

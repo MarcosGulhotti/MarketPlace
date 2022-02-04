@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Bem-vindo!</title>
+    <style>
+      .item{ border: 1px solid black; width: 500px; display: flex; align-items:
+      center; justify-content: space-evenly; background-color: rgb(240, 226,
+      243); flex-direction: column;}
+    </style>
+  </head>
+  <body>
+    <h2>Olá {{name}}! </h2>
+    <p>Vimos que você finalizou sua compra</p>
+    <div>
+      <h2>Produtos Comprados</h2>
+      <div>
+        {{#each products}}
+          <div class="item">
+            <p>Nome: {{name}}</p>
+            <p>Preço: R${{price}}</p>
+            <p>ID da compra: {{completedPurchaseId}}</p>
+          </div>
+        {{/each}}
+      </div>
+      <p>total: R${{total}}</p>
+    </div>
+
+  </body>
+</html>
