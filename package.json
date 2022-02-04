@@ -1,10 +1,10 @@
 {
   "name": "entrega-6",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/src/server.js",
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
