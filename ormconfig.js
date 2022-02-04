@@ -1,5 +1,6 @@
 const devEnv = {
   type: "postgres",
+  url: process.env.DATABASE_URL,
   host: process.env.PG_HOST,
   post: "5432",
   database: process.env.PG_DB,
